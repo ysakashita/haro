@@ -7,6 +7,9 @@ Slackに通知されたAlert Managerからのアラートメッセージを受�
 
 デモ動画は[こちら](https://youtu.be/0-yCTHrpOm0)を参照ください。
 
+Qiitaの記事[「Kubernetesで障害発生するとNT-Dが発動しユニコーンガンダムのサイコフレームが発光するシステムの開発
+」](https://qiita.com/ysakashita/items/512d010fc3b794b333bb)にも詳細が記載していますので参照ください。
+
 # セットアップ方法
 
 ## コマンドで起動する場合
