@@ -12,6 +12,9 @@ Qiitaの記事[「Kubernetesで障害発生するとNT-Dが発動しユニコー
 
 # セットアップ方法
 
+事前に[Slack](https://api.slack.com/apps)にてWebSocketのBotとして登録する必要があります。
+また、Botとして登録した後は、Slackの対象のチャンネルへメンバ追加してください。
+
 ## コマンドで起動する場合
 
 1. 環境変数を設定
@@ -50,6 +53,8 @@ $ kubectl create ns haro
 
 2. secret.yaml を作成
 
+以下の内容で`secret.yaml`を作成します。
+
 ```YAML
 apiVersion: v1
 kind: Secret
@@ -86,3 +91,6 @@ $ kubectl apply -f secret.yaml
 ```
 $ kubectl apply -k manifests/
 ```
+
+:memo: 本Pod内のコンテナイメージは`arm64`のアーキテクチャです。
+もし、別アーキテクチャのコンテナイメージが必要な方は、Makefileをアップデートしコンテナイメージを作成してください。
