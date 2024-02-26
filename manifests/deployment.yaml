@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: haro
+  namespace: haro
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: haro
+  template:
+    metadata:
+      labels:
+        app: haro
+    spec:
+      containers:
+      - name: haro
+        imagePullPolicy: Always
+        image: ysakashita/python-merossiot:3.9.18-0.4.6.2
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+        - name: SLACK_APP_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: haro
+              key: SLACK_APP_TOKEN
+        - name: SLACK_BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: haro
+              key: SLACK_BOT_TOKEN
+        - name: ALERTMANAGER_ID
+          valueFrom:
+            secretKeyRef:
+              name: haro
+              key: ALERTMANAGER_ID
+        - name: MEROSS_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: haro
+              key: MEROSS_EMAIL
+        - name: MEROSS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: haro
+              key: MEROSS_PASSWORD
+        - name: MEROSS_DEVICE_TYPE
+          valueFrom:
+            secretKeyRef:
+              name: haro
+              key: MEROSS_DEVICE_TYPE
+        - name: MEROSS_DEVICE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: haro
+              key: MEROSS_DEVICE_NAME
+        - name: MEROSS_DEVICE_CHANNEL
+          valueFrom:
+            secretKeyRef:
+              name: haro
+              key: MEROSS_DEVICE_CHANNEL
+        command:
+        - "python"
+        - "/bot/haro.py"
+        volumeMounts:
+        - mountPath: /bot
+          name: script
+      volumes:
+      - name: script
+        configMap:
+          name: haro
