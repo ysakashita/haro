@@ -160,3 +160,4 @@ cython_debug/
 #.idea/
 manifests/.token
 manifests/.secret.yaml
+test/*
